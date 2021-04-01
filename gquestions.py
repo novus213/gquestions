@@ -2,7 +2,7 @@ usage='''
 ❓❔👾 Gquestions CLI Usage ❔❓
 
 🔍 Usage:
-    gquestions.py query <keyword> (en|es) [depth <depth>] [--csv] [--headless]
+    gquestions.py query <keyword> (en|es|fr) [depth <depth>] [--csv] [--headless]
     gquestions.py (-h | --help)
 
 💡 Examples:
@@ -60,9 +60,6 @@ def prettyOutputName(filetype='html'):
 def initBrowser(headless=False):
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
     return webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 """
 Search on Google and returns the list of PAA questions in SERP.
@@ -71,17 +68,22 @@ def newSearch(browser,query):
     if lang== "en":
         browser.get("https://www.google.com?hl=en")
         searchbox = browser.find_element_by_xpath("//input[@aria-label='Search']")
-    else:
+    elif lang== "es":
         browser.get("https://www.google.com?hl=es")
         searchbox = browser.find_element_by_xpath("//input[@aria-label='Buscar']")
-    
+    elif lang== "fr":
+	browser.get("https://www.google.com?hl=fr")
+        searchbox = browser.find_element_by_xpath("//input[@aria-label='Rechercher']")
+
     searchbox.send_keys(query)
     sleepBar(2)
     tabNTimes()
     if lang== "en":
         searchbtn = browser.find_elements_by_xpath("//input[@aria-label='Google Search']")
-    else:
+    elif lang== "es":
     	searchbtn = browser.find_elements_by_xpath("//input[@aria-label='Buscar con Google']")
+    elif lang== "fr":
+    	searchbtn = browser.find_elements_by_xpath("//input[@aria-label='Recherche Google']")
     try:
         searchbtn[-1].click()
     except:
