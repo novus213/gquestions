@@ -60,6 +60,9 @@ def prettyOutputName(filetype='html'):
 def initBrowser(headless=False):
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--disable-features=NetworkService")
+    if headless:
+        chrome_options.add_argument('headless')
     return webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 """
 Search on Google and returns the list of PAA questions in SERP.
