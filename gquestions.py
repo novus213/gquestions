@@ -75,7 +75,7 @@ def newSearch(browser,query):
         browser.get("https://www.google.com?hl=es")
         searchbox = browser.find_element_by_xpath("//input[@aria-label='Buscar']")
     elif lang== "fr":
-	browser.get("https://www.google.com?hl=fr")
+        browser.get("https://www.google.com?hl=fr")
         searchbox = browser.find_element_by_xpath("//input[@aria-label='Rechercher']")
 
     searchbox.send_keys(query)
@@ -84,9 +84,9 @@ def newSearch(browser,query):
     if lang== "en":
         searchbtn = browser.find_elements_by_xpath("//input[@aria-label='Google Search']")
     elif lang== "es":
-    	searchbtn = browser.find_elements_by_xpath("//input[@aria-label='Buscar con Google']")
+        searchbtn = browser.find_elements_by_xpath("//input[@aria-label='Buscar con Google']")
     elif lang== "fr":
-    	searchbtn = browser.find_elements_by_xpath("//input[@aria-label='Recherche Google']")
+        searchbtn = browser.find_elements_by_xpath("//input[@aria-label='Recherche Google']")
     try:
         searchbtn[-1].click()
     except:
